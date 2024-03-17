@@ -17,7 +17,7 @@
       user-select: none;
     }
     div#letter {
-      width: 400px;
+      width: 360px;
       aspect-ratio: 1/1;
       background-color: #eee;
       display: grid;
@@ -35,9 +35,9 @@
       color: black;
       text-align: center;
       text-decoration: none;
-      display: inline-block;
-      font-size: 16px;
-      margin: 4px 2px;
+      display: inline-grid;
+      place-content: center;
+      font-size: 100px;
       transition-duration: 0.2s;
       cursor: pointer;
       border-radius: 40px;
@@ -51,13 +51,13 @@
     }
   </style>
   <body>
-    <div style="flex-grow: 1; display: grid; place-items: center; ">
+    <div style="flex-grow: 1; display: grid; place-items: center">
       <div id="letter">ㄱ</div>
     </div>
-    <div style="text-align: center; display: flex; gap: 50px; justify-content: center">
-      <button id="btn1" style="font-size: 100px; padding: 20px">1</button>
-      <button id="btn2" style="font-size: 100px; padding: 20px">2</button>
-      <button id="btn3" style="font-size: 100px; padding: 20px">3</button>
+    <div style="text-align: center; display: flex; gap: 20px; justify-content: center">
+      <button id="btn1">1</button>
+      <button id="btn2">2</button>
+      <button id="btn3">3</button>
     </div>
   </body>
   <script>
