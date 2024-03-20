@@ -7,28 +7,66 @@
   </head>
   <style>
     html {
-      height: 95%;
-    }
-    body {
-      padding: 10px;
-      height: 100%;
-      display: flex;
-      flex-direction: column;
       user-select: none;
     }
-    div#letter {
-      width: 360px;
+    input,
+    textarea,
+    button,
+    select,
+    a {
+      -webkit-tap-highlight-color: transparent;
+    }
+    body {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    section {
+      --section-width: clamp(200px, 100dvw, 400px);
+      width: var(--section-width);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    section#top-buttons-section {
+      height: 10dvh;
+    }
+    section#card-section {
+      height: 60dvh;
+    }
+    .card-outer {
+      --border-radius: 20%;
+      --card-size: calc(var(--section-width) * 0.9);
+      width: var(--card-size);
       aspect-ratio: 1/1;
-      background-color: #eee;
       display: grid;
       place-content: center;
-      font-size: 250px;
-      border-radius: 20px;
-      box-shadow: 5px 5px 10px #ccc;
-      text-shadow: 4px 4px 8px #aaa;
+      border-radius: var(--border-radius);
+      background-image: conic-gradient(rgb(125, 168, 210) var(--percent), transparent var(--percent));
+      transition: --percent linear 0.1s;
+      box-shadow: 5px 5px 10px #555;
     }
-    button {
-      width: 150px;
+    .card-inner {
+      width: calc(var(--card-size) * 0.8);
+      aspect-ratio: 1/1;
+      border-radius: var(--border-radius);
+      display: grid;
+      place-content: center;
+      font-size: calc(var(--card-size) * 0.5);
+      font-weight: 600;
+      text-shadow: 5px 5px 10px #999;
+      background-color: beige;
+    }
+    section#bottom-buttons-section {
+      --bottom-button-size: clamp(50px, 30vw, 100px);
+      --bottom-button-font-size: calc(var(--bottom-button-size) * 0.5);
+      height: 20dvh;
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+    }
+    section#bottom-buttons-section button {
+      width: var(--bottom-button-size);
       aspect-ratio: 1/1;
       background-color: #f7f7f7;
       border: none;
@@ -37,34 +75,37 @@
       text-decoration: none;
       display: inline-grid;
       place-content: center;
-      font-size: 100px;
-      transition-duration: 0.2s;
+      font-size: var(--bottom-button-font-size);
+      transition: background-color linear 0.1s;
       cursor: pointer;
-      border-radius: 40px;
+      border-radius: 50%;
       box-shadow: 5px 5px 10px #ccc;
     }
-    button:hover {
-      background-color: #ecb5b5;
-    }
-    button:active {
-      background-color: #9ac298;
+    section#bottom-buttons-section button:active {
+      background-color: #afcbe6;
     }
   </style>
   <body>
-    <div style="flex-grow: 1; display: grid; place-items: center">
-      <div id="letter">ㄱ</div>
-    </div>
-    <div style="text-align: center; display: flex; gap: 20px; justify-content: center">
-      <button id="btn1">1</button>
-      <button id="btn2">2</button>
-      <button id="btn3">3</button>
-    </div>
+    <section id="top-buttons-section"></section>
+    <section id="card-section">
+      <div class="card-outer">
+        <div class="card-inner">
+          <span id="letter"></span>
+        </div>
+      </div>
+    </section>
+    <section id="bottom-buttons-section">
+      <button id="bottom-button-1">1</button>
+      <button id="bottom-button-2">2</button>
+      <button id="bottom-button-3">3</button>
+    </section>
   </body>
   <script>
-    const letter = document.getElementById("letter")
-    const btn1 = document.getElementById("btn1")
-    const btn2 = document.getElementById("btn2")
-    const btn3 = document.getElementById("btn3")
+    const cardOuterEl = document.querySelector(".card-outer")
+    const letterEl = document.getElementById("letter")
+    const bottomButton1 = document.getElementById("bottom-button-1")
+    const bottomButton2 = document.getElementById("bottom-button-2")
+    const bottomButton3 = document.getElementById("bottom-button-3")
     const 자음 = ["ㄱ", "ㄴ", "ㄷ", "ㄹ", "ㅁ", "ㅂ", "ㅅ", "ㅇ", "ㅈ", "ㅊ", "ㅋ", "ㅌ", "ㅍ", "ㅎ"]
     const 모음 = ["ㅏ", "ㅑ", "ㅓ", "ㅕ", "ㅗ", "ㅛ", "ㅜ", "ㅠ", "ㅡ", "ㅣ"]
     const short = [
@@ -80,36 +121,36 @@
       ["기", "니", "디", "리", "미", "비", "시", "이", "지", "치", "키", "티", "피", "히"],
     ]
     const get자음 = () => {
-      const prev = letter.textContent
+      const prev = letterEl.textContent
       let next = prev
       while (prev === next) {
         next = 자음[Math.floor(Math.random() * 14)]
       }
-      letter.textContent = next
+      letterEl.textContent = next
     }
     const get모음 = () => {
-      const prev = letter.textContent
+      const prev = letterEl.textContent
       let next = prev
       while (prev === next) {
         next = 모음[Math.floor(Math.random() * 10)]
       }
-      letter.textContent = next
+      letterEl.textContent = next
     }
     const getShort = () => {
-      const prev = letter.textContent
+      const prev = letterEl.textContent
       let next = prev
       while (prev === next) {
         next = short[Math.floor(Math.random() * 10)][Math.floor(Math.random() * 14)]
       }
-      letter.textContent = next
+      letterEl.textContent = next
     }
-    btn1.addEventListener("click", () => {
+    bottomButton1.addEventListener("click", () => {
       get자음()
     })
-    btn2.addEventListener("click", () => {
+    bottomButton2.addEventListener("click", () => {
       get모음()
     })
-    btn3.addEventListener("click", () => {
+    bottomButton3.addEventListener("click", () => {
       getShort()
     })
   </script>
