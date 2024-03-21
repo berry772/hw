@@ -1,259 +1,34 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-  </head>
-  <style>
-    @property --percent {
-      syntax: "<percentage>";
-      inherits: true;
-      initial-value: 0%;
-    }
-    html {
-      user-select: none;
-    }
-    input,
-    textarea,
-    button,
-    select,
-    a {
-      -webkit-tap-highlight-color: transparent;
-    }
-    body {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-    section {
-      --section-width: clamp(200px, 100dvw, 400px);
-      width: var(--section-width);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    section#top-buttons-section {
-      height: 10dvh;
-    }
-    section#card-section {
-      height: 60dvh;
-    }
-    .card-outer {
-      --duration: 5s;
-      --percent: 0%;
-      --border-radius: 20%;
-      --card-size: calc(var(--section-width) * 0.9);
-      width: var(--card-size);
-      aspect-ratio: 1/1;
-      display: grid;
-      place-content: center;
-      border-radius: var(--border-radius);
-      box-shadow: 5px 5px 10px #555;
-      background-image: conic-gradient(rgb(125, 168, 210) var(--percent), transparent var(--percent));
-      transition: none;
-    }
-    .card-outer.full {
-      --percent: 100%;
-      transition: --percent linear var(--duration);
-    }
-    .card-outer.over {
-      background-image: conic-gradient(rgb(210, 134, 125) var(--percent), transparent var(--percent));
-      transition: --percent linear var(--duration);
-    }
-    .card-inner {
-      width: calc(var(--card-size) * 0.8);
-      aspect-ratio: 1/1;
-      border-radius: var(--border-radius);
-      display: grid;
-      place-content: center;
-      font-size: calc(var(--card-size) * 0.5);
-      font-weight: 600;
-      text-shadow: 5px 5px 10px #999;
-      background-color: white;
-    }
-    section#bottom-buttons-section {
-      --bottom-button-size: clamp(50px, 30vw, 100px);
-      --bottom-button-font-size: calc(var(--bottom-button-size) * 0.5);
-      height: 20dvh;
-      display: flex;
-      align-items: center;
-      justify-content: space-around;
-    }
-    section#bottom-buttons-section button {
-      width: var(--bottom-button-size);
-      aspect-ratio: 1/1;
-      background-color: #f7f7f7;
-      border: none;
-      color: black;
-      text-align: center;
-      text-decoration: none;
-      display: inline-grid;
-      place-content: center;
-      font-size: var(--bottom-button-font-size);
-      transition: background-color linear 0.1s;
-      cursor: pointer;
-      border-radius: 50%;
-      box-shadow: 5px 5px 10px #ccc;
-    }
-    section#bottom-buttons-section button:active {
-      background-color: #afcbe6;
-    }
-  </style>
-  <style>
-    .switch {
-      --button-width: 3.5em;
-      --button-height: 2em;
-      --toggle-diameter: 1.5em;
-      --button-toggle-offset: calc((var(--button-height) - var(--toggle-diameter)) / 2);
-      --toggle-shadow-offset: 10px;
-      --toggle-wider: 3em;
-      --color-grey: #cccccc;
-      --color-green: #4296f4;
-    }
 
-    .slider {
-      display: inline-block;
-      width: var(--button-width);
-      height: var(--button-height);
-      background-color: var(--color-grey);
-      border-radius: calc(var(--button-height) / 2);
-      position: relative;
-      transition: 0.3s all ease-in-out;
-    }
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>한글</title>
+  <link rel="stylesheet" href="./main.css" />
+  <link rel="stylesheet" href="./switch.css" />
+  <script defer="defer" type="application/javascript" src="./index.js"></script>
+</head>
 
-    .slider::after {
-      content: "";
-      display: inline-block;
-      width: var(--toggle-diameter);
-      height: var(--toggle-diameter);
-      background-color: #fff;
-      border-radius: calc(var(--toggle-diameter) / 2);
-      position: absolute;
-      top: var(--button-toggle-offset);
-      transform: translateX(var(--button-toggle-offset));
-      box-shadow: var(--toggle-shadow-offset) 0 calc(var(--toggle-shadow-offset) * 4) rgba(0, 0, 0, 0.1);
-      transition: 0.3s all ease-in-out;
-    }
-
-    .switch input[type="checkbox"]:checked + .slider {
-      background-color: var(--color-green);
-    }
-
-    .switch input[type="checkbox"]:checked + .slider::after {
-      transform: translateX(calc(var(--button-width) - var(--toggle-diameter) - var(--button-toggle-offset)));
-      box-shadow: calc(var(--toggle-shadow-offset) * -1) 0 calc(var(--toggle-shadow-offset) * 4) rgba(0, 0, 0, 0.1);
-    }
-
-    .switch input[type="checkbox"] {
-      display: none;
-    }
-
-    .switch input[type="checkbox"]:active + .slider::after {
-      width: var(--toggle-wider);
-    }
-
-    .switch input[type="checkbox"]:checked:active + .slider::after {
-      transform: translateX(calc(var(--button-width) - var(--toggle-wider) - var(--button-toggle-offset)));
-    }
-  </style>
-  <body>
-    <section id="top-buttons-section">
-      <label class="switch">
-        <input id="timer-switch" type="checkbox" />
-        <span class="slider"></span>
-      </label>
-    </section>
-    <section id="card-section">
-      <div class="card-outer">
-        <div class="card-inner">
-          <span id="letter"></span>
-        </div>
+<body>
+  <section id="top-buttons-section">
+    <label class="switch">
+      <input id="timer-switch" type="checkbox" />
+      <span class="slider"></span>
+    </label>
+  </section>
+  <section id="card-section">
+    <div class="card-outer">
+      <div class="card-inner">
+        <span id="letter"></span>
       </div>
-    </section>
-    <section id="bottom-buttons-section">
-      <button id="bottom-button-1">1</button>
-      <button id="bottom-button-2">2</button>
-      <button id="bottom-button-3">3</button>
-    </section>
-  </body>
-  <script>
-    const DURATION = 5000 // 5s
-    const cardOuterEl = document.querySelector(".card-outer")
-    const letterEl = document.getElementById("letter")
-    const bottomButton1 = document.getElementById("bottom-button-1")
-    const bottomButton2 = document.getElementById("bottom-button-2")
-    const bottomButton3 = document.getElementById("bottom-button-3")
-    let showTimer = false
-    let timeout = null
-    const 자음 = ["ㄱ", "ㄴ", "ㄷ", "ㄹ", "ㅁ", "ㅂ", "ㅅ", "ㅇ", "ㅈ", "ㅊ", "ㅋ", "ㅌ", "ㅍ", "ㅎ"]
-    const 모음 = ["ㅏ", "ㅑ", "ㅓ", "ㅕ", "ㅗ", "ㅛ", "ㅜ", "ㅠ", "ㅡ", "ㅣ"]
-    const short = [
-      ["가", "나", "다", "라", "마", "바", "사", "아", "자", "차", "카", "타", "파", "하"],
-      ["갸", "냐", "댜", "랴", "먀", "뱌", "샤", "야", "쟈", "챠", "캐", "턔", "퍄", "햐"],
-      ["거", "너", "더", "러", "머", "버", "서", "어", "저", "처", "커", "터", "퍼", "허"],
-      ["겨", "녀", "됴", "려", "몌", "벼", "셔", "여", "져", "쳐", "쿄", "텨", "펴", "혀"],
-      ["고", "노", "도", "로", "모", "보", "소", "오", "조", "초", "코", "토", "포", "호"],
-      ["교", "뇨", "됴", "료", "묘", "뵤", "쇼", "요", "죠", "쵸", "쿄", "툐", "표", "효"],
-      ["구", "누", "두", "루", "무", "부", "수", "우", "주", "추", "쿠", "투", "푸", "후"],
-      ["규", "뉴", "듀", "류", "뮤", "뷰", "슈", "유", "쥬", "츄", "큐", "튜", "퓨", "휴"],
-      ["그", "느", "드", "르", "므", "브", "스", "으", "즈", "츠", "크", "트", "프", "흐"],
-      ["기", "니", "디", "리", "미", "비", "시", "이", "지", "치", "키", "티", "피", "히"],
-    ]
-    const get자음 = () => {
-      const prev = letterEl.textContent
-      let next = prev
-      while (prev === next) {
-        next = 자음[Math.floor(Math.random() * 14)]
-      }
-      letterEl.textContent = next
-    }
-    const get모음 = () => {
-      const prev = letterEl.textContent
-      let next = prev
-      while (prev === next) {
-        next = 모음[Math.floor(Math.random() * 10)]
-      }
-      letterEl.textContent = next
-    }
-    const getShort = () => {
-      const prev = letterEl.textContent
-      let next = prev
-      while (prev === next) {
-        next = short[Math.floor(Math.random() * 10)][Math.floor(Math.random() * 14)]
-      }
-      letterEl.textContent = next
-    }
-    function startTimer() {
-      if (!showTimer) return
-      cardOuterEl.classList.remove("full")
-      cardOuterEl.classList.remove("over")
-      setTimeout(() => cardOuterEl.classList.add("full"), 50)
-      clearTimeout(timeout)
-      timeout = setTimeout(() => {
-        cardOuterEl.classList.add("over")
-      }, DURATION)
-    }
-    function toggleTimer(e) {
-      showTimer = e.target.checked
-      if (!showTimer) {
-        cardOuterEl.classList.remove("full")
-        cardOuterEl.classList.remove("over")
-      }
-    }
-    const timerSwitch = document.getElementById("timer-switch")
-    timerSwitch.addEventListener("change", toggleTimer)
-    bottomButton1.addEventListener("click", () => {
-      get자음()
-      showTimer && startTimer()
-    })
-    bottomButton2.addEventListener("click", () => {
-      get모음()
-      showTimer && startTimer()
-    })
-    bottomButton3.addEventListener("click", () => {
-      getShort()
-      showTimer && startTimer()
-    })
-  </script>
+    </div>
+  </section>
+  <section id="bottom-buttons-section">
+    <button id="bottom-button-1">1</button>
+    <button id="bottom-button-2">2</button>
+    <button id="bottom-button-3">3</button>
+  </section>
+</body>
+
 </html>

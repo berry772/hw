@@ -1,0 +1,106 @@
+@property --percent {
+    syntax: "<percentage>";
+    inherits: true;
+    initial-value: 0%;
+}
+
+html {
+    user-select: none;
+}
+
+input,
+textarea,
+button,
+select,
+a {
+    -webkit-tap-highlight-color: transparent;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+section {
+    --section-width: clamp(200px, 100dvw, 400px);
+    width: var(--section-width);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+section#top-buttons-section {
+    height: 10dvh;
+}
+
+section#card-section {
+    height: 60dvh;
+}
+
+.card-outer {
+    --duration: 5s;
+    --percent: 0%;
+    --border-radius: 20%;
+    --card-size: calc(var(--section-width) * 0.9);
+    width: var(--card-size);
+    aspect-ratio: 1/1;
+    display: grid;
+    place-content: center;
+    border-radius: var(--border-radius);
+    box-shadow: 5px 5px 10px #555;
+    background-image: conic-gradient(rgb(125, 168, 210) var(--percent), transparent var(--percent));
+    transition: none;
+}
+
+.card-outer.full {
+    --percent: 100%;
+    transition: --percent linear var(--duration);
+}
+
+.card-outer.over {
+    background-image: conic-gradient(rgb(210, 134, 125) var(--percent), transparent var(--percent));
+    transition: --percent linear var(--duration);
+}
+
+.card-inner {
+    width: calc(var(--card-size) * 0.8);
+    aspect-ratio: 1/1;
+    border-radius: var(--border-radius);
+    display: grid;
+    place-content: center;
+    font-size: calc(var(--card-size) * 0.5);
+    font-weight: 600;
+    text-shadow: 5px 5px 10px #999;
+    background-color: white;
+}
+
+section#bottom-buttons-section {
+    --bottom-button-size: clamp(50px, 30vw, 100px);
+    --bottom-button-font-size: calc(var(--bottom-button-size) * 0.5);
+    height: 20dvh;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+section#bottom-buttons-section button {
+    width: var(--bottom-button-size);
+    aspect-ratio: 1/1;
+    background-color: #f7f7f7;
+    border: none;
+    color: black;
+    text-align: center;
+    text-decoration: none;
+    display: inline-grid;
+    place-content: center;
+    font-size: var(--bottom-button-font-size);
+    transition: background-color linear 0.1s;
+    cursor: pointer;
+    border-radius: 50%;
+    box-shadow: 5px 5px 10px #ccc;
+}
+
+section#bottom-buttons-section button:active {
+    background-color: #afcbe6;
+}
