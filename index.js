@@ -5,45 +5,34 @@ const letterEl = document.getElementById("letter")
 const bottomButton1 = document.getElementById("bottom-button-1")
 const bottomButton2 = document.getElementById("bottom-button-2")
 const bottomButton3 = document.getElementById("bottom-button-3")
+const timerSwitch = document.getElementById("timer-switch")
+const 난이도form = document.getElementById("난이도form")
 let showTimer = false
 let timeout = null
-const 자음 = ["ㄱ", "ㄴ", "ㄷ", "ㄹ", "ㅁ", "ㅂ", "ㅅ", "ㅇ", "ㅈ", "ㅊ", "ㅋ", "ㅌ", "ㅍ", "ㅎ"]
-const 모음 = ["ㅏ", "ㅑ", "ㅓ", "ㅕ", "ㅗ", "ㅛ", "ㅜ", "ㅠ", "ㅡ", "ㅣ"]
-const short = [
-    ["가", "나", "다", "라", "마", "바", "사", "아", "자", "차", "카", "타", "파", "하"],
-    ["갸", "냐", "댜", "랴", "먀", "뱌", "샤", "야", "쟈", "챠", "캐", "턔", "퍄", "햐"],
-    ["거", "너", "더", "러", "머", "버", "서", "어", "저", "처", "커", "터", "퍼", "허"],
-    ["겨", "녀", "됴", "려", "몌", "벼", "셔", "여", "져", "쳐", "쿄", "텨", "펴", "혀"],
-    ["고", "노", "도", "로", "모", "보", "소", "오", "조", "초", "코", "토", "포", "호"],
-    ["교", "뇨", "됴", "료", "묘", "뵤", "쇼", "요", "죠", "쵸", "쿄", "툐", "표", "효"],
-    ["구", "누", "두", "루", "무", "부", "수", "우", "주", "추", "쿠", "투", "푸", "후"],
-    ["규", "뉴", "듀", "류", "뮤", "뷰", "슈", "유", "쥬", "츄", "큐", "튜", "퓨", "휴"],
-    ["그", "느", "드", "르", "므", "브", "스", "으", "즈", "츠", "크", "트", "프", "흐"],
-    ["기", "니", "디", "리", "미", "비", "시", "이", "지", "치", "키", "티", "피", "히"],
-]
-const get자음 = () => {
+let 현재난이도 = 1
+
+function pickRandomLetter(pickerFn) {
     const prev = letterEl.textContent
     let next = prev
-    while (prev === next) {
-        next = 자음[Math.floor(Math.random() * 14)]
+    while (prev === next || next == null) {
+        next = pickerFn()
     }
     letterEl.textContent = next
 }
-const get모음 = () => {
-    const prev = letterEl.textContent
-    let next = prev
-    while (prev === next) {
-        next = 모음[Math.floor(Math.random() * 10)]
-    }
-    letterEl.textContent = next
+function pick자음() {
+    const { 자음count, 모음count } = 난이도[현재난이도]
+    pickRandomLetter(() => 자음[Math.floor(Math.random() * 자음count)])
+    showTimer && startTimer()
 }
-const getShort = () => {
-    const prev = letterEl.textContent
-    let next = prev
-    while (prev === next) {
-        next = short[Math.floor(Math.random() * 10)][Math.floor(Math.random() * 14)]
-    }
-    letterEl.textContent = next
+function pick모음() {
+    const { 자음count, 모음count } = 난이도[현재난이도]
+    pickRandomLetter(() => 모음[Math.floor(Math.random() * 모음count)])
+    showTimer && startTimer()
+}
+function pick조합() {
+    const { 자음count, 모음count } = 난이도[현재난이도]
+    pickRandomLetter(() => 조합[Math.floor(Math.random() * 모음count)][Math.floor(Math.random() * 자음count)])
+    showTimer && startTimer()
 }
 function startTimer() {
     if (!showTimer) return
@@ -62,17 +51,14 @@ function toggleTimer(e) {
         cardOuterEl.classList.remove("over")
     }
 }
-const timerSwitch = document.getElementById("timer-switch")
-timerSwitch.addEventListener("change", toggleTimer)
-bottomButton1.addEventListener("click", () => {
-    get자음()
-    showTimer && startTimer()
-})
-bottomButton2.addEventListener("click", () => {
-    get모음()
-    showTimer && startTimer()
-})
-bottomButton3.addEventListener("click", () => {
-    getShort()
-    showTimer && startTimer()
-})
+
+function init() {
+    timerSwitch.addEventListener("change", toggleTimer)
+    bottomButton1.addEventListener("click", pick자음)
+    bottomButton2.addEventListener("click", pick모음)
+    bottomButton3.addEventListener("click", pick조합)
+    난이도form.addEventListener("change", e => {
+        현재난이도 = parseInt(e.target.value)
+    })
+}
+init()

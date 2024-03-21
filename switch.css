@@ -1,7 +1,7 @@
 .switch {
-    --button-width: 3.5em;
-    --button-height: 2em;
-    --toggle-diameter: 1.5em;
+    --button-width: 40px;
+    --button-height: 20px;
+    --toggle-diameter: 16px;
     --button-toggle-offset: calc((var(--button-height) - var(--toggle-diameter)) / 2);
     --toggle-shadow-offset: 10px;
     --toggle-wider: 3em;
@@ -16,7 +16,7 @@
     background-color: var(--color-grey);
     border-radius: calc(var(--button-height) / 2);
     position: relative;
-    transition: 0.3s all ease-in-out;
+    transition: 0.2s all ease-in-out;
 }
 
 .slider::after {
@@ -30,7 +30,7 @@
     top: var(--button-toggle-offset);
     transform: translateX(var(--button-toggle-offset));
     box-shadow: var(--toggle-shadow-offset) 0 calc(var(--toggle-shadow-offset) * 4) rgba(0, 0, 0, 0.1);
-    transition: 0.3s all ease-in-out;
+    transition: 0.2s all ease-in-out;
 }
 
 .switch input[type="checkbox"]:checked+.slider {

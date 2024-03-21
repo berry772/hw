@@ -6,6 +6,7 @@
 
 html {
     user-select: none;
+    accent-color: #4296f4;
 }
 
 input,
@@ -32,6 +33,27 @@ section {
 
 section#top-buttons-section {
     height: 10dvh;
+    display: grid;
+    grid-template-columns: 100px 1fr;
+    column-gap: 10px;
+    padding-left: 20px;
+}
+section#top-buttons-section > *:nth-child(odd) {
+    background-color: #eee;
+    border-radius: 4px;
+    padding: 4px;
+    font-weight: 600;
+    color: #777;
+}
+section#top-buttons-section #난이도form {
+    display: flex;
+    align-items: center;
+    gap: 16px;  
+}
+section#top-buttons-section #난이도form label {
+    display: flex;
+    align-items: center;
+    gap: 8px;  
 }
 
 section#card-section {
