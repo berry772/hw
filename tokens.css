@@ -1,0 +1,22 @@
+:root {
+  /* colors */
+  --color-accent: #4296f4;
+  --color-timer: #7cb7f3;
+  --color-timeover: #f37c7c;
+
+  /* sizes */
+  --section-width: clamp(200px, 100dvw, 400px);
+
+  /* times */
+  --timer-duration: 5s;
+
+  /* shadows */
+  --shadow-box: 5px 5px 10px #555;
+  --shadow-text: 5px 5px 10px #999;
+}
+
+@property --percent {
+  syntax: "<percentage>";
+  inherits: true;
+  initial-value: 0%;
+}

@@ -1,42 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>한글</title>
+    <link rel="stylesheet" href="./index.css" />
+    <link rel="stylesheet" href="./components/index.css" />
+    <script defer="defer" type="application/javascript" src="./constants.js"></script>
+    <script defer="defer" type="application/javascript" src="./index.js"></script>
+    <script defer="defer" type="module" src="./components/index.js"></script>
+  </head>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>한글</title>
-  <link rel="stylesheet" href="./main.css" />
-  <link rel="stylesheet" href="./switch.css" />
-  <script defer="defer" type="application/javascript" src="./constants.js"></script>
-  <script defer="defer" type="application/javascript" src="./index.js"></script>
-</head>
-
-<body>
-  <section id="top-buttons-section">
-    <span>타이머</span>
-    <label class="switch">
-      <input id="timer-switch" type="checkbox" />
-      <span class="slider"></span>
-    </label>
-    <span>난이도</span>
-    <form id="난이도form">
-      <label><input name="난이도" type="radio" value="1" checked><span>1</span></label>
-      <label><input name="난이도" type="radio" value="2"><span>2</span></label>
-      <label><input name="난이도" type="radio" value="3"><span>3</span></label>
-    </form>
-  </section>
-  <section id="card-section">
-    <div class="card-outer">
-      <div class="card-inner">
-        <span id="letter"></span>
-      </div>
-    </div>
-  </section>
-  <section id="bottom-buttons-section">
-    <button id="bottom-button-1">1</button>
-    <button id="bottom-button-2">2</button>
-    <button id="bottom-button-3">3</button>
-  </section>
-</body>
-
+  <body>
+    <section id="top-buttons-section">
+      <span>타이머</span>
+      <label class="switch">
+        <input id="timer-switch" type="checkbox" />
+        <span class="slider"></span>
+      </label>
+      <span>난이도</span>
+      <form id="난이도form">
+        <label><input name="난이도" type="radio" value="1" checked /><span>1</span></label>
+        <label><input name="난이도" type="radio" value="2" /><span>2</span></label>
+        <label><input name="난이도" type="radio" value="3" /><span>3</span></label>
+      </form>
+    </section>
+    <section id="card-section">
+      <ig-letter-card></ig-letter-card>
+    </section>
+    <section id="bottom-buttons-section">
+      <ig-play-button id="bottom-button-1">1</ig-play-button>
+      <ig-play-button id="bottom-button-2">2</ig-play-button>
+      <ig-play-button id="bottom-button-3">3</ig-play-button>
+    </section>
+  </body>
 </html>

@@ -1,0 +1,23 @@
+ig-play-button {
+  --bottom-button-size: clamp(50px, 30vw, 100px);
+  --bottom-button-font-size: calc(var(--bottom-button-size) * 0.5);
+  width: var(--bottom-button-size);
+  aspect-ratio: 1/1;
+  background-color: #f7f7f7;
+  border: none;
+  color: black;
+  text-align: center;
+  text-decoration: none;
+  display: inline-grid;
+  place-content: center;
+  font-size: var(--bottom-button-font-size);
+  transition: background-color linear 0.1s;
+  cursor: pointer;
+  border-radius: 50%;
+  box-shadow: 5px 5px 10px #ccc;
+  overflow: hidden;
+}
+
+ig-play-button:active {
+  background-color: #afcbe6;
+}

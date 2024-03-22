@@ -4,9 +4,9 @@
     --toggle-diameter: 16px;
     --button-toggle-offset: calc((var(--button-height) - var(--toggle-diameter)) / 2);
     --toggle-shadow-offset: 10px;
-    --toggle-wider: 3em;
+    --toggle-wider: 20px;
     --color-grey: #cccccc;
-    --color-green: #4296f4;
+    --color-green: var(--color-accent);
 }
 
 .slider {

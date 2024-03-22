@@ -1,0 +1,12 @@
+{
+  "name": "hw",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "esbenp.prettier-vscode", //
+        "github.copilot",
+        "ritwickdey.liveserver"
+      ]
+    }
+  }
+}

@@ -1,0 +1,36 @@
+ig-letter-card {
+  --percent: 0%;
+  --border-radius: 20%;
+  --card-size: calc(var(--section-width) * 0.9);
+  width: var(--card-size);
+  aspect-ratio: 1/1;
+  display: grid;
+  place-content: center;
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow-box);
+  background-image: conic-gradient(var(--color-timer) var(--percent), transparent var(--percent));
+  transition: none;
+}
+
+ig-letter-card.full {
+  --percent: 100%;
+  transition: --percent linear var(--timer-duration);
+}
+
+ig-letter-card.over {
+  background-image: conic-gradient(var(--color-timeover) var(--percent), transparent var(--percent));
+  transition: --percent linear var(--timer-duration);
+}
+
+ig-letter-card .inner {
+  color: red;
+  width: calc(var(--card-size) * 0.8);
+  aspect-ratio: 1/1;
+  border-radius: var(--border-radius);
+  display: grid;
+  place-content: center;
+  font-size: calc(var(--card-size) * 0.5);
+  font-weight: 600;
+  text-shadow: var(--shadow-text);
+  background-color: white;
+}
